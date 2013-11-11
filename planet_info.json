@@ -1,0 +1,32 @@
+{
+	"Mercury": {
+		"color": "#B7B7B7",
+		"diameter": 4879.4,
+		"rotation_period": 58.65,
+		"orbital_period": 87.97
+	},
+	"Venus": {
+		"color": "#E5BC89",
+		"diameter": 12104,
+		"rotation_period": -243.02,
+		"orbital_period": 224.7
+	},
+	"Earth_Moon": {
+		"color": "#66CCFF",
+		"diameter": 12756,
+		"rotation_period": 1,
+		"orbital_period": 365.26
+	},
+	"Mars": {
+		"color": "#FF8585",
+		"diameter": 6787,
+		"rotation_period": 1.026,
+		"orbital_period": 686.98
+	},
+	"Jupiter": {
+		"color": "#707070",
+		"diameter": 142800,
+		"rotation_period": 0.41,
+		"orbital_period": 4331.98
+	}
+}
