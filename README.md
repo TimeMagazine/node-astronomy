@@ -75,6 +75,6 @@ The second argument is the angle from which to view the solar system (in degrees
 
 Here's an [R plot](test/plot.R) of the output of the `project` method for the inner solar system and Haley's comet:
 
-[![Inner Solar System](test/inner_solar_system.png)]
+![Inner Solar System](test/inner_solar_system.png)
 
 
