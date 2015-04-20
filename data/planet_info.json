@@ -1,4 +1,4 @@
-{
+	{
 	"Mercury": {
 		"color": "#B7B7B7",
 		"diameter": 4879.4,
@@ -11,7 +11,7 @@
 		"rotation_period": -243.02,
 		"orbital_period": 224.7
 	},
-	"Earth_Moon": {
+	"Earth": {
 		"color": "#66CCFF",
 		"diameter": 12756,
 		"rotation_period": 1,

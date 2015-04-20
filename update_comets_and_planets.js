@@ -12,14 +12,18 @@ function planets() {
 
 		var fields =  ["name", "a", "e", "I", "L", "w", "node"];
 
-		var planets = [],
+		var planets = {},
 			name;
 
 		body.split(/\n/).forEach(function(line, l) {
-			var planet = {}; 
-			line.split(/\s+/).forEach(function(datum, d) {
-				planet[fields[d]] = d === 0? datum : parseFloat(datum);
+			var planet = {}; 			
+			line.split(/\s{2,100}/).forEach(function(datum, d) {
+				planet[fields[d]] = d === 0? datum : parseFloat(datum);				
 			});
+
+			if (planet.name == "EM Bary") {
+				planet.name = "Earth";
+			}
 
 			if (planet.name == "") {
 				planet.name = name + "_Cy";
@@ -28,11 +32,11 @@ function planets() {
 			}
 
 			if (Object.keys(planet).length > 1 && (argv.pluto || name !== "Pluto")) {
-				planets.push(planet);
+				planets[planet.name] = planet;
 			}
 		});
 
-		console.log("Found info for " + planets.length / 2 + " planets.");
+		console.log("Found info for " + Object.keys(planets).length / 2 + " planets.");
 		fs.writeFileSync(__dirname + "/data/planets.json", JSON.stringify(planets, null, 2));
 
 	});
@@ -42,8 +46,9 @@ function comets() {
 	var comets = [];
 	request("http://ssd.jpl.nasa.gov/dat/ELEMENTS.COMET", function(err, resp, body) {
 		var lines = body.split(/\n/);
-		var headers = lines.shift().split(/\s{3,50}/);
-		headers.shift(); // we'll deal with name separately
+		var headers = [ 'epoch', 'q', 'e', 'I', 'w', 'node', 'Tp', 'Ref' ];
+
+		lines.shift(); // burn headers
 
 		lines.forEach(function(line, l) {
 			var comet = {};
