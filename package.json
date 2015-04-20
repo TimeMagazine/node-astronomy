@@ -24,6 +24,7 @@
   "homepage": "https://github.com/wilson428/node-astronomy",
   "dependencies": {
     "downcache": "0.0.8",
+    "minimist": "^1.1.1",
     "request": "^2.55.0"
   }
 }
