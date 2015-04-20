@@ -4,7 +4,7 @@
   "description": "Calculate the orbital paths of planets and comets",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test_planets.js Earth && node test/test_comets.js 'Halley (1986)'"
   },
   "repository": {
     "type": "git",
