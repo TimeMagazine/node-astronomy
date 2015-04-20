@@ -1,0 +1,28 @@
+{
+  "name": "node-astronomy",
+  "version": "0.0.2",
+  "description": "Calculate the orbital paths of planets and comets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wilson428/node-astronomy.git"
+  },
+  "keywords": [
+    "astronomy",
+    "planets",
+    "JPL",
+    "comets"
+  ],
+  "author": "Chris Wilson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wilson428/node-astronomy/issues"
+  },
+  "homepage": "https://github.com/wilson428/node-astronomy",
+  "dependencies": {
+    "downcache": "0.0.8"
+  }
+}
