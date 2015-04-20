@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var request = require("downcache"),
+var request = require("request"),
 	fs = require("fs");
 
 var argv = require('minimist')(process.argv.slice(2));
