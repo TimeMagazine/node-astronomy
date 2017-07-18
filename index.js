@@ -18,22 +18,13 @@ var sin = function(a) { return Math.sin(a * Math.PI / 180); },
 	cos = function(a) { return Math.cos(a * Math.PI / 180); };
 
 module.exports = {
-
-	dateToJulian: function(date) {
-	    return Math.floor((date / 86400000) - (date.getTimezoneOffset()/1440) + 2440587.5);
-	},
-
-	// convenience trig functions for degrees (Javascripts Math object is in radians)
 	sin: sin,
 	cos: cos,
 
-	// convert a body's heliocentric coordinates to J2000 coordinates (see step 5 of JPL document)
-	ecliptic: function(data, xp, yp, zp) {
-		var xecl = (cos(data.w) * cos(data.node) - sin(data.w) * sin(data.node) * cos(data.I)) * xp + (-sin(data.w) * cos(data.node) - cos(data.w) * sin(data.node) * cos(data.I)) * yp,
-			yecl = (cos(data.w) * sin(data.node) + sin(data.w) * cos(data.node) * cos(data.I)) * xp + (-sin(data.w) * sin(data.node) + cos(data.w) * cos(data.node) * cos(data.I)) * yp,
-			zecl = sin(data.w) * sin(data.I) * xp + cos(data.w) * sin(data.I) * yp;
-
-		return [xecl, yecl, -zecl];
+	// check against https://ssd.jpl.nasa.gov/tc.cgi#top
+	dateToJulian: function(date) {
+	    // return Math.floor((date / 86400000) - (date.getTimezoneOffset() / 1440) + 2440587.5);
+	    return Math.floor((date / 86400000) + 2440587.5);
 	},
 
 	// convert to xy for a given angle theta rotating around the x axis
@@ -49,8 +40,8 @@ module.exports = {
 
 		return body.positions.map(function(d) {
 			return {
-				x: AU * d.position.ecliptic[x_index],
-				y: AU * (Math.sin(theta) * d.position.ecliptic[y_index] + Math.cos(theta) * d.position.ecliptic[z_index])
+				x: AU * d.position.xecl,
+				y: AU * (Math.sin(theta) * d.position.yecl + Math.cos(theta) * d.position.zecl)
 			}
 		});
 	}

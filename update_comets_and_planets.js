@@ -18,25 +18,39 @@ function planets() {
 		body.split(/\n/).forEach(function(line, l) {
 			var planet = {}; 			
 			line.split(/\s{2,100}/).forEach(function(datum, d) {
-				planet[fields[d]] = d === 0? datum : parseFloat(datum);				
+				planet[fields[d]] = d === 0? datum : parseFloat(datum);
+				if (d > 0) {
+					planet[fields[d] + "_Cy"] = null;
+				}
 			});
 
 			if (planet.name == "EM Bary") {
 				planet.name = "Earth";
 			}
 
-			if (planet.name == "") {
-				planet.name = name + "_Cy";
+			// This is the /Cy field after each planet
+			if (planet.name == "" && (argv.pluto || name !== "Pluto")) {
+				for (var field in planet) {
+					if (planet.hasOwnProperty(field)) {
+						if (field == "name") {
+							continue;
+						}
+						field_cy = field + "_Cy";
+						if (planet.hasOwnProperty(field_cy)) {
+							planets[name][field_cy] = planet[field];
+						}
+					}
+				}
 			} else {
 				name = planet.name;
 			}
 
-			if (Object.keys(planet).length > 1 && (argv.pluto || name !== "Pluto")) {
+			if (planet.name !== "" && Object.keys(planet).length > 1 && (argv.pluto || name !== "Pluto")) {
 				planets[planet.name] = planet;
 			}
 		});
 
-		console.log("Found info for " + Object.keys(planets).length / 2 + " planets.");
+		console.log("Found info for " + Object.keys(planets).length + " planets.");
 		fs.writeFileSync(__dirname + "/data/planets.json", JSON.stringify(planets, null, 2));
 
 	});
